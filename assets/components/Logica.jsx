@@ -3,7 +3,7 @@ import React from 'react'
 import Formulario from './Formulario';
 
 
-const Logica = ({ setMonto, setNumeroCuotas, nombre, setNombre, limpiar, setLimpiar, verFormulario }) => {
+const Logica = () => {
 
 
 

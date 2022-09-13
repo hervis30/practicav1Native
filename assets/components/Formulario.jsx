@@ -26,7 +26,7 @@ const Formulario = ({ monto, setMonto, numeroCuotas, setNumeroCuotas, nombre, se
         let objetoBuscado = creditos.find(nombreb => nombreb.nombre == nombre);
         if (objetoBuscado != undefined) {
 
-            //placeHolde(true);
+
             setNombre(objetoBuscado.nombre);
             setMonto(objetoBuscado.monto);
             setNumeroCuotas(objetoBuscado.numeroCuotas);
@@ -37,7 +37,6 @@ const Formulario = ({ monto, setMonto, numeroCuotas, setNumeroCuotas, nombre, se
             setPlaceHolde(true);
         } else {
             alert("El no se encuentra el el objeto");
-            placeHolde(false);
         }
 
     }
