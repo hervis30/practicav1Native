@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Formulario from './assets/components/Formulario';
-import Logica from './assets/components/Logica';
 import { useState, useEffect } from 'react';
 
 export default function App() {
@@ -26,88 +25,64 @@ export default function App() {
   //useState para controlar cambiar los placeholder
   const [placeHolde, setPlaceHolde] = useState(false);
 
-  const hacerArreglo = () => {
-    const objeto = { nombre, monto, numeroCuotas, tipoPrestamo, valorCuotas, totalDeuda, fecha }
-    setCreditos([...creditos, objeto]);
-  }
-
-
-
-  const fechaActual = () => {
+  let f1 = () => {
     let dia = new Date().toLocaleDateString();
     let date;
     date = dia;
     setFecha(dia);
+  };
+  window.onload = f1;
 
-  }
+  const hacerArreglo = () => {
+    const objeto = { nombre, monto, numeroCuotas, tipoPrestamo, valorCuotas, totalDeuda, fecha }
+    setCreditos([...creditos, objeto]);
+  };
 
   let tipoCredito = (montoAprobado, cuotaAprobada) => {
     let interes = 0;
     let deudaTotal = 0;
     let valorCuota = 0;
-    console.log("se vinieron los calculas");
-    console.log(montoAprobado);
-    console.log(cuotaAprobada);
+
     switch (tipoPrestamo) {
       case "vivienda":
-        console.log("credito de vivienda");
         interes = montoAprobado * 0.015;
-        console.log(interes);
         SetValidaTipoCredito(false);
         break;
       case "educacion":
-        console.log("credito de educacion");
         interes = montoAprobado * 0.010;
-        console.log(interes);
         SetValidaTipoCredito(false);
         break;
       case "libre":
-        console.log("credito de libre inversion");
         interes = montoAprobado * 0.02;
-        console.log(interes);
         SetValidaTipoCredito(false);
         break;
       default:
-        console.log("credito no  valido");
         SetValidaTipoCredito(true);
         break;
-
     }
     deudaTotal = parseFloat(montoAprobado) + parseFloat(interes * cuotaAprobada);
-    console.log(deudaTotal);
     valorCuota = deudaTotal / cuotaAprobada;
-    console.log(valorCuota);
     setTotalDeuda(deudaTotal);
     setvalorCuotas(valorCuota);
-    fechaActual();
+    f1();
     setPlaceHolde(true);
     hacerArreglo();
-
-  }
+  };
 
   if (irValidaMonto == true) {
-    //console.log("se viene la validacion del monto");
-
     if (monto >= 1000000 && monto <= 100000000) {
-      //console.log("continuamos con los calculos del credito");
       SetValidaMonto(false);
       if (numeroCuotas >= 12 && numeroCuotas <= 36) {
-        //console.log("se aprueba la cuota del credito");
         SetValidaNumeroCuotas(false);
-        console.log("procedemos con el tipo de credito");
         tipoCredito(monto, numeroCuotas);
-
       } else {
-        //console.log("la cuota no cumple, debe ser entre 12 y 36");
         SetValidaNumeroCuotas(true);
         setPlaceHolde(false);
       }
     } else {
-      //console.log("Alerta el monto ingresado no no esta en los rangos definidos por el banco");
       SetValidaMonto(true);
       setPlaceHolde(false);
       if (numeroCuotas >= 12 && numeroCuotas <= 36) {
-        //console.log("se aprueba la cuota del credito");
         SetValidaNumeroCuotas(false);
       }
     }
@@ -117,7 +92,6 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-
       <Formulario
         nombre={nombre} setNombre={setNombre}
         monto={monto} setMonto={setMonto}
@@ -134,16 +108,6 @@ export default function App() {
         placeHolde={placeHolde} setPlaceHolde={setPlaceHolde}
         validaTipoCredito={validaTipoCredito} SetValidaTipoCredito={SetValidaTipoCredito}
       />
-
-      {/* <Logica
-        setMonto={setMonto}
-        setNumeroCuotas={setNumeroCuotas}
-        nombre={nombre}
-        setNombre={setNombre}
-        limpiar={limpiar}
-        setLimpiar={setLimpiar}
-        verFormulario={verFormulario}
-      /> */}
 
     </View>
   );

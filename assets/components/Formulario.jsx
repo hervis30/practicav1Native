@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import React from 'react'
 import { TouchableOpacity } from 'react-native';
+import { styles } from '../style/miStyle';
 
 const Formulario = ({ monto, setMonto, numeroCuotas, setNumeroCuotas, nombre, setNombre,
     tipoPrestamo, setTipoPrestamo, validaVacio, setValidaVacio,
@@ -9,24 +10,18 @@ const Formulario = ({ monto, setMonto, numeroCuotas, setNumeroCuotas, nombre, se
 
     let validar = () => {
         if ([nombre, monto, numeroCuotas, tipoPrestamo].includes("")) {
-            //console.log("hay al menos un campo vacio");
             setValidaVacio(true);
             setPlaceHolde(false);
         } else {
             setValidaVacio(false);
-            //console.log("los campos esta llenos");
             setIrValidaMonto(true);
         }
-    }
+    };
 
 
     let buscar = () => {
-        console.log("buscar");
-
         let objetoBuscado = creditos.find(nombreb => nombreb.nombre == nombre);
         if (objetoBuscado != undefined) {
-
-
             setNombre(objetoBuscado.nombre);
             setMonto(objetoBuscado.monto);
             setNumeroCuotas(objetoBuscado.numeroCuotas);
@@ -37,11 +32,10 @@ const Formulario = ({ monto, setMonto, numeroCuotas, setNumeroCuotas, nombre, se
             setPlaceHolde(true);
         } else {
             alert("El no se encuentra el el objeto");
-        }
+        };
 
     }
     let limpiar = () => {
-        console.log("limpiar");
         setNombre("");
         setMonto("");
         setTipoPrestamo("");
@@ -51,9 +45,7 @@ const Formulario = ({ monto, setMonto, numeroCuotas, setNumeroCuotas, nombre, se
         setFecha("");
         setPlaceHolde(false);
         SetValidaTipoCredito(false);
-
-
-    }
+    };
     return (
         <View>
             <View style={styles.titulo}><Text style={{ fontWeight: 'bold' }} >Simulador de Credito</Text></View>
@@ -156,87 +148,24 @@ const Formulario = ({ monto, setMonto, numeroCuotas, setNumeroCuotas, nombre, se
             <>
                 {validaMonto && (
 
-                    <View style={styles.campoVacio}><Text style={{ fontSize: 14, color: 'white', fontWeight: 'bold', textAlign: 'center' }} >Verifique si el monto ingresado esta entre 1 millon y cien millones</Text></View>
+                    <View style={styles.validaMonto}><Text style={{ fontSize: 14, color: 'white', fontWeight: 'bold', textAlign: 'center' }} >Verifique si el monto ingresado esta entre 1 millon y cien millones</Text></View>
                 )}
             </>
             <>
                 {validaNumeroCuotas && (
 
-                    <View style={styles.campoVacio}><Text style={{ fontSize: 14, color: 'white', fontWeight: 'bold', textAlign: 'center' }} >Verifique si el numero de cuotas esta entre 12 y 36</Text></View>
-                )}
-            </>
-            <>
-                {validaNumeroCuotas && (
-
-                    <View style={styles.campoVacio}><Text style={{ fontSize: 14, color: 'white', fontWeight: 'bold', textAlign: 'center' }} >Verifique si el numero de cuotas esta entre 12 y 36</Text></View>
+                    <View style={styles.validaNumeroCuotas}><Text style={{ fontSize: 15, color: 'white', fontWeight: 'bold', textAlign: 'center' }} >Verifique si el numero de cuotas esta entre 12 y 36</Text></View>
                 )}
             </>
             <>
                 {validaTipoCredito && (
 
-                    <View style={styles.campoVacio}><Text style={{ fontSize: 14, color: 'white', fontWeight: 'bold', textAlign: 'center' }} >Ingresa un tipo de credito valido: vivienda, educacion o libre</Text></View>
+                    <View style={styles.validaTipoCredito}><Text style={{ fontSize: 15, color: 'white', fontWeight: 'bold', textAlign: 'center' }} >Ingresa un tipo de credito valido: vivienda, educacion o libre</Text></View>
                 )}
             </>
         </View >
     )
 }
-const styles = StyleSheet.create({
-    titulo: {
-        flex: 0.5,
-        backgroundColor: '#ffdab9',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        marginTop: 20,
-        marginBottom: 20,
-        padding: 0,
 
-
-    },
-    formulario: {
-        flex: 4,
-        flexDirection: 'row',
-        backgroundColor: '#b0e0e6',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 400,
-
-
-    },
-    label: {
-        flex: 1,
-        flexDirection: 'row',
-        marginTop: 10,
-        marginBottom: 10,
-    },
-    text: {
-
-        marginTop: 10,
-    },
-    tochable: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#6b8e23',
-        marginTop: 20,
-        width: 140,
-        height: 30,
-        borderRadius: 3,
-        padding: 4,
-        marginLeft: 30,
-        marginRight: 30,
-
-    },
-    campoVacio: {
-        flex: 0.5,
-        backgroundColor: '#ff0000',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        marginTop: 20,
-        marginBottom: 20,
-        padding: 0,
-    }
-});
 
 export default Formulario
