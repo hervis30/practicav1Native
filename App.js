@@ -24,6 +24,14 @@ export default function App() {
   const [validaTipoCredito, SetValidaTipoCredito] = useState(false);
   //useState para controlar cambiar los placeholder
   const [placeHolde, setPlaceHolde] = useState(false);
+   //useState para controlar cambiar los placeholder
+   const [irFuncionValidacion, setIrFuncionValidacion] = useState(false);
+
+ 
+
+  let deudaTotal = 0;
+  let valorCuota = 0;
+  
 
   let f1 = () => {
     let dia = new Date().toLocaleDateString();
@@ -33,15 +41,18 @@ export default function App() {
   };
   window.onload = f1;
 
+  
+
   const hacerArreglo = () => {
-    const objeto = { nombre, monto, numeroCuotas, tipoPrestamo, valorCuotas, totalDeuda, fecha }
+    const objeto = { nombre, monto, numeroCuotas, tipoPrestamo,valorCuota, deudaTotal, fecha }
     setCreditos([...creditos, objeto]);
   };
 
   let tipoCredito = (montoAprobado, cuotaAprobada) => {
+    
     let interes = 0;
-    let deudaTotal = 0;
-    let valorCuota = 0;
+   
+   
 
     switch (tipoPrestamo) {
       case "vivienda":
@@ -69,6 +80,8 @@ export default function App() {
     hacerArreglo();
   };
 
+
+
   if (irValidaMonto == true) {
     if (monto >= 1000000 && monto <= 100000000) {
       SetValidaMonto(false);
@@ -90,6 +103,11 @@ export default function App() {
   }
 
 
+
+
+
+
+
   return (
     <View style={styles.container}>
       <Formulario
@@ -107,6 +125,7 @@ export default function App() {
         validaNumeroCuotas={validaNumeroCuotas}
         placeHolde={placeHolde} setPlaceHolde={setPlaceHolde}
         validaTipoCredito={validaTipoCredito} SetValidaTipoCredito={SetValidaTipoCredito}
+        setIrFuncionValidacion={setIrFuncionValidacion}
       />
 
     </View>

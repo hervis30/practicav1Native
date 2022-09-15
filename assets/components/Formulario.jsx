@@ -9,12 +9,15 @@ const Formulario = ({ monto, setMonto, numeroCuotas, setNumeroCuotas, nombre, se
     setvalorCuotas, setTotalDeuda, setFecha, totalDeuda, validaTipoCredito, SetValidaTipoCredito, creditos }) => {
 
     let validar = () => {
+        
         if ([nombre, monto, numeroCuotas, tipoPrestamo].includes("")) {
             setValidaVacio(true);
             setPlaceHolde(false);
+          
         } else {
             setValidaVacio(false);
             setIrValidaMonto(true);
+           
         }
     };
 
